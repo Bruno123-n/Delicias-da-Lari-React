@@ -1,3 +1,5 @@
+import "./ProductCard.css"
+
 function ProductCard({ produto, onSelecionar }) {
   // Função que será chamada ao clicar no botão
  const handleComprar = () => {

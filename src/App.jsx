@@ -1,7 +1,7 @@
 import { useState } from "react"
 import ProductCard from "./components/ProductCard"
 import Modal from "./components/Modal";
-import "./ProductCard.css"
+
 import "./Modal.css"
 
 function App() {
