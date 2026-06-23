@@ -1,8 +1,8 @@
 import { useState } from "react"
 import ProductCard from "./components/ProductCard"
 import Modal from "./components/Modal";
+import "./app.css"
 
-import "./Modal.css"
 
 function App() {
   // Lista de produtos (pode vir de um banco de dados ou API depois)
@@ -23,19 +23,12 @@ function App() {
   // console.log(produtoSelecionado)
 
   return (
-    <div style={{ textAlign: "center", padding: "20px" }}>
+    <div className="app">
       <h1>Delícias da Lari 🍰</h1>
       
       
       {/* Container para organizar os cards lado a lado */}
-      <div style={{ 
-        display: "flex", 
-        justifyContent: "center", // Centraliza horizontalmente
-        alignItems: "center",     // Alinha verticalmente se necessário
-        gap: "20px", 
-        flexWrap: "wrap",
-        marginTop: "30px"
-       }}>
+      <div className="produtos-container">
 
         <h2>Cliques: {contador}</h2>
 
@@ -44,6 +37,7 @@ function App() {
         </button>
 
         <input
+          className="busca"
           type="text"
           onChange={(e) => setBusca(e.target.value)}
           placeholder="Buscar produto..."

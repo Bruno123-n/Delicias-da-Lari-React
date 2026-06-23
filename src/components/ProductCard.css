@@ -1,15 +1,20 @@
 .produto {
-  border: 1px solid #ccc;
+  width: 220px;
+  background: white;
+  border-radius: 12px;
   padding: 16px;
-  border-radius: 8px;
-  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: 0.2s;
 }
 
-.produto-imagem {
+.produto:hover {
+  transform: translateY(-4px);
+}
+.produto img {
   border-radius: 8px;
 }
 
-.produto-botao {
+.produto button {
   background-color: #e11d48;
   color: white;
   padding: 10px 20px;
