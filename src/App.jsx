@@ -1,20 +1,24 @@
 import { useState } from "react"
 import ProductCard from "./components/ProductCard"
+import Modal from "./components/Modal";
 
 function App() {
   // Lista de produtos (pode vir de um banco de dados ou API depois)
   const produtos = [
-    { id: 1, nome: "Bolo de Chocolate", preco: 15.00, imagem: "https://via.placeholder.com/150" },
-    { id: 2, nome: "Bolo de Cenoura", preco: 12.50, imagem: "https://via.placeholder.com/150" },
-    { id: 3, nome: "Brigadeiro Gourmet", preco: 3.00, imagem: "https://via.placeholder.com/150" }
+    { id: 1, nome: "Bolo de Chocolate", preco: 15.00, imagem: "https://picsum.photos/150" },
+    { id: 2, nome: "Bolo de Cenoura", preco: 12.50, imagem: "https://picsum.photos/150" },
+    { id: 3, nome: "Brigadeiro Gourmet", preco: 3.00, imagem: "https://picsum.photos/150" }
   ];
 
   const [contador, setContador] = useState(0)
   const [busca, setBusca] = useState("")
+  const [produtoSelecionado, setProdutoSelecionado] = useState(null)
 
   const produtosFiltrados = produtos.filter((produto) =>
     produto.nome.toLowerCase().includes(busca.toLowerCase())
   )
+
+  // console.log(produtoSelecionado)
 
   return (
     <div style={{ textAlign: "center", padding: "20px" }}>
@@ -46,12 +50,17 @@ function App() {
         {produtosFiltrados.map((produto) => (
           <ProductCard
             key={produto.id} // O React exige uma chave única para listas
-            nome={produto.nome}
-            preco={produto.preco}
-            imagem={produto.imagem}
-          />
-        ))}
+            produto={produto}
+            onSelecionar={setProdutoSelecionado}
+            />
+          ))}
       </div>
+          {produtoSelecionado && (
+            <Modal
+              produto={produtoSelecionado}
+              onFechar={setProdutoSelecionado}
+            />
+          )}
     </div>
   )
 }
