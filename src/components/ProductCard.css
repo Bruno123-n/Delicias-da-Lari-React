@@ -1,0 +1,19 @@
+.produto {
+  border: 1px solid #ccc;
+  padding: 16px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.produto-imagem {
+  border-radius: 8px;
+}
+
+.produto-botao {
+  background-color: #e11d48;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}

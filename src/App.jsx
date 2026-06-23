@@ -1,6 +1,8 @@
 import { useState } from "react"
 import ProductCard from "./components/ProductCard"
 import Modal from "./components/Modal";
+import "./ProductCard.css"
+import "./Modal.css"
 
 function App() {
   // Lista de produtos (pode vir de um banco de dados ou API depois)
