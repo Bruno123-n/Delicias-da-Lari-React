@@ -1,18 +1,17 @@
 import { useState } from "react"
-import ProductCard from "./components/ProductCard"
-import Modal from "./components/Modal";
-import "./app.css"
-
+import Modal from "./components/Modal"
+import SearchBar from "./components/SearchBar"
+import ProductList from "./components/ProductList"
+import "./App.css"
 
 function App() {
-  // Lista de produtos (pode vir de um banco de dados ou API depois)
-  const produtos = [
-    { id: 1, nome: "Bolo de Chocolate", preco: 15.00, imagem: "https://picsum.photos/150" },
-    { id: 2, nome: "Bolo de Cenoura", preco: 12.50, imagem: "https://picsum.photos/150" },
-    { id: 3, nome: "Brigadeiro Gourmet", preco: 3.00, imagem: "https://picsum.photos/150" }
-  ];
 
-  const [contador, setContador] = useState(0)
+  const produtos = [
+    { id: 1, nome: "Bolo de Milho", preco: 15.00, imagem: "imagens/Bolo-de-Milho.jpeg" },
+    { id: 2, nome: "Orelhinha de Gato", preco: 12.50, imagem: "imagens/Orelhinha-de-Gato.jpg" },
+    { id: 3, nome: "Pão Caseiro", preco: 3.00, imagem: "imagens/Pao-caseiro.jpg" }
+  ]
+
   const [busca, setBusca] = useState("")
   const [produtoSelecionado, setProdutoSelecionado] = useState(null)
 
@@ -20,43 +19,28 @@ function App() {
     produto.nome.toLowerCase().includes(busca.toLowerCase())
   )
 
-  // console.log(produtoSelecionado)
-
   return (
     <div className="app">
-      <h1>Delícias da Lari 🍰</h1>
-      
-      
-      {/* Container para organizar os cards lado a lado */}
-      <div className="produtos-container">
 
-        <h2>Cliques: {contador}</h2>
+      <header className="header-container">
+        <h1>Delícias da Lari 🍰</h1>
+        <p>Doces artesanais feitos com carinho</p>
+      </header>
 
-        <button onClick={() => setContador(contador + 1)}>
-          Clique aqui
-        </button>
+      <SearchBar busca={busca} setBusca={setBusca} />
 
-        <input
-          className="busca"
-          type="text"
-          onChange={(e) => setBusca(e.target.value)}
-          placeholder="Buscar produto..."
+      <ProductList
+        produtos={produtosFiltrados}
+        onSelecionar={setProdutoSelecionado}
+      />
+
+      {produtoSelecionado && (
+        <Modal
+          produto={produtoSelecionado}
+          onFechar={() => setProdutoSelecionado(null)}
         />
+      )}
 
-        {produtosFiltrados.map((produto) => (
-          <ProductCard
-            key={produto.id} // O React exige uma chave única para listas
-            produto={produto}
-            onSelecionar={setProdutoSelecionado}
-            />
-          ))}
-      </div>
-          {produtoSelecionado && (
-            <Modal
-              produto={produtoSelecionado}
-              onFechar={setProdutoSelecionado}
-            />
-          )}
     </div>
   )
 }

@@ -1,28 +1,14 @@
-import "./Modal.css"
-
 function Modal({ produto, onFechar }) {
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
-        <button 
-            className="modal-close"
-            onClick={() => onFechar(null)}
-        >
-            X
-        </button>
-
+    <div className="modal-overlay" onClick={onFechar}>
+      <div className="modal" onClick={(e) => e.stopPropagation()}>
         <h2>{produto.nome}</h2>
+        <img src={produto.imagem} alt={produto.nome} />
+        <p>Preço: R$ {produto.preco}</p>
 
-        <img
-          src={produto.imagem}
-          alt={produto.nome}
-        />
-
-        <p>
-          R$ {produto.preco.toLocaleString("pt-BR", {
-            minimumFractionDigits: 2
-          })}
-        </p>
+        <button onClick={onFechar}>
+          Fechar
+        </button>
       </div>
     </div>
   )

@@ -1,4 +1,4 @@
-.produto {
+.card{
   width: 220px;
   background: white;
   border-radius: 12px;
@@ -7,14 +7,18 @@
   transition: 0.2s;
 }
 
-.produto:hover {
+.card:hover {
   transform: translateY(-4px);
 }
-.produto img {
-  border-radius: 8px;
+
+.card img {
+  width: 100%;
+  height:220px;
+  object-fit:cover;
+  border-radius: 12px;
 }
 
-.produto button {
+.card button {
   background-color: #e11d48;
   color: white;
   padding: 10px 20px;
@@ -22,3 +26,4 @@
   border-radius: 4px;
   cursor: pointer;
 }
+

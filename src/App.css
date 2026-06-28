@@ -1,8 +1,17 @@
 .app {
   text-align: center;
+  background: linear-gradient(180deg, #f8c8dc, #ffffff);
+  min-height: 100vh;
   padding: 20px;
 }
 
+header {
+  background: #ff69b4;
+  padding: 20px;
+  border-radius: 15px;
+  color: white;
+  margin-bottom: 20px;
+}
 .produtos-container {
   display: flex;
   justify-content: center;
