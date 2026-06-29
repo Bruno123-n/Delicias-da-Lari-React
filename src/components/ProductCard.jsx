@@ -7,9 +7,30 @@ function ProductCard({ produto, onSelecionar }) {
       onClick={() => onSelecionar(produto)}
     >
 
-      <img src={produto.imagem} alt={produto.nome} />
-      <h3>{produto.nome}</h3>
-      <p>R$ {produto.preco}</p>
+      <img 
+        src={produto.imagem} 
+        alt={produto.nome} 
+      />
+
+      <h3>
+        {produto.nome}
+      </h3>
+
+      <p className="rating">
+        ⭐ Avaliação: {produto.avaliacao}
+      </p>
+
+      <p className="description">
+        {produto.descricao}
+      </p>
+
+      <p className="price">
+        R$ {produto.preco}
+      </p>
+      
+      <button>
+        Ver detalhes
+      </button>
       
     </div>
   )
