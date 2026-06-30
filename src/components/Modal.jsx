@@ -1,3 +1,4 @@
+import formatPrice from "../utils/formatPrice"
 import "./Modal.css"
 
 function Modal({ produto, onFechar }) {
@@ -10,7 +11,8 @@ function Modal({ produto, onFechar }) {
           src={produto.imagem}
           alt={produto.nome}
         />
-        <p>Preço: R$ {produto.preco}</p>
+        <p>Preço: {formatPrice(produto.preco)}
+        </p>
 
         <button onClick={onFechar}>
           Fechar

@@ -3,6 +3,7 @@ import Modal from "./components/Modal"
 import SearchBar from "./components/SearchBar"
 import ProductList from "./components/ProductList"
 import produtos from "./data/produtos"
+import CategoryFilter from "./components/CategoryFilter"
 import "./App.css"
 
 function App() {
@@ -35,17 +36,10 @@ function App() {
 
         <SearchBar busca={busca} setBusca={setBusca} />
 
-        <div className="categorias">
-
-          <button id="1" onClick={() => setCategoria("Todos")}>Todos</button>
-
-          <button id="2" onClick={() => setCategoria("Bolos")}>Bolos</button>
-
-          <button id="3" onClick={() => setCategoria("Pães")}>Pães</button>
-
-          <button id="4" onClick={() => setCategoria("Doces")}>Doces</button>
-
-        </div>
+        <CategoryFilter
+            categoria={categoria}
+            setCategoria={setCategoria}
+        />
 
         <ProductList
           produtos={produtosFiltrados}

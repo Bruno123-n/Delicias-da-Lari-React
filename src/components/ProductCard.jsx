@@ -1,3 +1,4 @@
+import formatPrice from "../utils/formatPrice"
 import "./ProductCard.css"
 
 function ProductCard({ produto, onSelecionar }) {
@@ -25,9 +26,9 @@ function ProductCard({ produto, onSelecionar }) {
       </p>
 
       <p className="price">
-        R$ {produto.preco}
+          {formatPrice(produto.preco)}
       </p>
-      
+
       <button>
         Ver detalhes
       </button>

@@ -1,6 +1,7 @@
 const produtos = [
     { 
-      id: 1, nome: "Bolo de Milho",
+      id: 1, 
+      nome: "Bolo de Milho",
       categoria: "Bolos", 
       descricao: "☕ Quentinho, fofinho e irresistível.", 
       preco: 15.00, 
@@ -9,7 +10,8 @@ const produtos = [
     },
 
     { 
-      id: 2, nome: "Orelhinha de Gato", 
+      id: 2, 
+      nome: "Orelhinha de Gato", 
       categoria: "Doces",
       descricao: "✨ Gosto de infância em cada pedaço.", 
       preco: 12.50, 
@@ -18,7 +20,8 @@ const produtos = [
     },
 
     { 
-      id: 3, nome: "Pão Caseiro", 
+      id: 3, 
+      nome: "Pão Caseiro", 
       categoria: "Pães",
       descricao: "🥖 Quentinho, macio e feito com amor.", 
       preco: 3.00, 
