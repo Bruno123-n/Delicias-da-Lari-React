@@ -1,6 +1,8 @@
 import formatPrice from "../utils/formatPrice"
 import "./ProductCard.css"
 
+const estrelas = [1, 2, 3, 4, 5]
+
 function ProductCard({ produto, onSelecionar }) {
   return (
     <div
@@ -18,7 +20,11 @@ function ProductCard({ produto, onSelecionar }) {
       </h3>
 
       <p className="rating">
-        ⭐ Avaliação: {produto.avaliacao}
+        {estrelas.map((estrela) => 
+          <span key={estrela}>
+            {estrela <= produto.avaliacao ? "⭐" : "☆"}
+          </span>
+        )}
       </p>
 
       <p className="description">
