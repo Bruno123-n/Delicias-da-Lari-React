@@ -3,11 +3,10 @@ import "./ProductCard.css"
 
 const estrelas = [1, 2, 3, 4, 5]
 
-function ProductCard({ produto, onSelecionar }) {
+function ProductCard({ produto, onSelecionar, adicionarAoCarrinho }) {
   return (
     <div
-      className="card"
-      onClick={() => onSelecionar(produto)}
+      className="card" 
     >
 
       <img 
@@ -35,8 +34,16 @@ function ProductCard({ produto, onSelecionar }) {
           {formatPrice(produto.preco)}
       </p>
 
-      <button>
+      <button 
+        onClick={() => onSelecionar(produto)}
+      >
         Ver detalhes
+      </button>
+
+      <button 
+        onClick={() => adicionarAoCarrinho(produto)}
+      >
+        Adicionar ao carrinho
       </button>
       
     </div>

@@ -4,6 +4,7 @@ import SearchBar from "./components/SearchBar"
 import ProductList from "./components/ProductList"
 import produtos from "./data/produtos"
 import CategoryFilter from "./components/CategoryFilter"
+import Cart from "./components/Cart"
 import "./App.css"
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
   const [categoria, setCategoria] = useState("Todos")
   const [busca, setBusca] = useState("")
   const [produtoSelecionado, setProdutoSelecionado] = useState(null)
+  const [carrinho, setCarrinho] = useState([])
 
   const produtosFiltrados = produtos.filter((produto) =>
     produto.nome.toLowerCase().includes(busca.toLowerCase()) && 
@@ -19,6 +21,12 @@ function App() {
       produto.categoria === categoria
     )
   )
+
+
+  function adicionarAoCarrinho(produto) {
+    setCarrinho([...carrinho, produto])  
+  }
+  
 
   
 
@@ -30,6 +38,7 @@ function App() {
       <div className="container">
 
         <header className="header-container">
+          <span>🛒 Carrinho: {carrinho.length}</span>
           <h1>Delícias da Lari 🍰</h1>
           <p>Doces artesanais feitos com carinho</p>
         </header>
@@ -44,6 +53,11 @@ function App() {
         <ProductList
           produtos={produtosFiltrados}
           onSelecionar={setProdutoSelecionado}
+          adicionarAoCarrinho={adicionarAoCarrinho}
+        />
+        
+        <Cart 
+          carrinho={carrinho} 
         />
 
       {produtoSelecionado && (

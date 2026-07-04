@@ -1,7 +1,7 @@
 import ProductCard from "./ProductCard"
 import "./ProductList.css"
 
-function ProductList({ produtos, onSelecionar }) {
+function ProductList({ produtos, onSelecionar, adicionarAoCarrinho }) {
   return (
     <div className="products">
       {produtos.map((produto) => (
@@ -9,6 +9,7 @@ function ProductList({ produtos, onSelecionar }) {
           key={produto.id}
           produto={produto}
           onSelecionar={onSelecionar}
+          adicionarAoCarrinho={adicionarAoCarrinho}
         />
       ))}
     </div>
