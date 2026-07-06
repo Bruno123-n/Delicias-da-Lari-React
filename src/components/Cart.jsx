@@ -4,7 +4,7 @@ import formatPrice from "../utils/formatPrice"
 function Cart({ carrinho }) {
 
     const total = carrinho.reduce((acumulador, produto) => {
-        return acumulador + produto.preco
+        return acumulador + produto.preco * produto.quantidade
     },0)
 
     if (carrinho.length === 0) {
@@ -24,6 +24,9 @@ function Cart({ carrinho }) {
 
                     <p>
                         {produto.nome}
+                    </p>
+                    <p>
+                        Quantidade: {produto.quantidade}
                     </p>
                     <p>
                         {formatPrice(produto.preco)}
