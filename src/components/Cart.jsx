@@ -28,13 +28,14 @@ function Cart({ carrinho }) {
                     <p>
                         {formatPrice(produto.preco)}
                     </p>
-                    <p>
-                        Total: {formatPrice(total)}
-                    </p>
 
                 </div>
             
             ))}
+
+            <p>
+                Total: {formatPrice(total)}
+            </p>
 
         </div>
     )

@@ -6,7 +6,7 @@ const produtos = [
       descricao: "☕ Quentinho, fofinho e irresistível.", 
       preco: 15.00, 
       avaliacao: 5,
-      imagem: "imagens/Bolo-de-Milho.jpeg" 
+      imagem: "imagens/Bolo-de-Milho.jpeg"
     },
 
     { 
@@ -16,7 +16,7 @@ const produtos = [
       descricao: "✨ Gosto de infância em cada pedaço.", 
       preco: 12.50, 
       avaliacao: 4.8,
-      imagem: "imagens/Orelhinha-de-Gato.jpg" 
+      imagem: "imagens/Orelhinha-de-Gato.jpg"
     },
 
     { 

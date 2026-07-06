@@ -24,9 +24,49 @@ function App() {
 
 
   function adicionarAoCarrinho(produto) {
-    setCarrinho([...carrinho, produto])  
+    const produtoEncontrado = carrinho.find((item) => item.id === produto.id) 
+    
+     if (produtoEncontrado) {
+
+        setCarrinho(
+
+            carrinho.map((item) => {
+
+                if (item.id === produto.id) {
+
+                    return {
+                        ...item, quantidade: item.quantidade + 1
+                    }
+
+                }
+
+                return item
+
+            })
+
+        )
+
+    } else {
+      setCarrinho([
+        ...carrinho,
+
+        {
+            ...produto,
+            quantidade: 1
+        }
+      ])
+      
+      
+        // adicionar produto novo
+
+    }
+
+console.log({
+  produto,
+  produtoEncontrado,
+  carrinho
+})
   }
-  
 
   
 
