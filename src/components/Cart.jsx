@@ -1,7 +1,7 @@
 import formatPrice from "../utils/formatPrice"
 
 
-function Cart({ carrinho }) {
+function Cart({ carrinho, diminuirQuantidade }) {
 
     const total = carrinho.reduce((acumulador, produto) => {
         return acumulador + produto.preco * produto.quantidade
@@ -28,6 +28,9 @@ function Cart({ carrinho }) {
                     <p>
                         Quantidade: {produto.quantidade}
                     </p>
+                    <button
+                        onClick={() => diminuirQuantidade(produto.id)}
+                    > - </button>
                     <p>
                         {formatPrice(produto.preco)}
                     </p>
