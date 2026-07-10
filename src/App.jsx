@@ -70,10 +70,10 @@ function App() {
 
     const itemEncontrado = carrinho.find((item) => item.id === id)
 
-    console.log({
-    idRecebido: id,
-    itemEncontrado
-    })
+    // console.log({
+    // idRecebido: id,
+    // itemEncontrado
+    // })
 
     if (itemEncontrado.quantidade > 1) {
 
@@ -115,6 +115,16 @@ function App() {
       // })
   }
 
+  function limparCarrinho() {
+    setCarrinho([])
+  }
+
+  function removerItem(id) {
+    setCarrinho(
+      carrinho.filter((item) => item.id !== id)
+    )  
+  }
+
   
 
 
@@ -145,6 +155,9 @@ function App() {
         <Cart 
           carrinho={carrinho} 
           diminuirQuantidade={diminuirQuantidade}
+          adicionarAoCarrinho={adicionarAoCarrinho}
+          limparCarrinho={limparCarrinho}
+          removerItem={removerItem}
         />
 
       {produtoSelecionado && (

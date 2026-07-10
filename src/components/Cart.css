@@ -1,0 +1,41 @@
+.cart {
+    outline:solid 1px red;
+    padding: 35px;
+    margin-top: 30px; 
+    background-color: #fff;
+    border-radius: 20px;
+}
+
+.cart h2 {
+    color: #9ca3af;
+}
+
+.cart-item {
+    outline:solid 1px red;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    padding: 10px;
+    color: black;
+}
+
+.subtotal {
+    color: #9ca3af;
+}
+
+.cart button {
+    background-color: #e11d48;
+    padding: 5px 15px;
+    border-radius: 10px;
+}
+
+.controles {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.total {
+    font-weight: bold;
+    color: #6a6d72;
+}
