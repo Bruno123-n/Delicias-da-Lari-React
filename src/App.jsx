@@ -119,10 +119,15 @@ function App() {
     setCarrinho([])
   }
 
+  
+
   function removerItem(id) {
-    setCarrinho(
-      carrinho.filter((item) => item.id !== id)
-    )  
+    if (confirm("Tem certeza que deseja remover este item?")) {
+
+      setCarrinho(
+        carrinho.filter((item) => item.id !== id)
+      )
+    }  
   }
 
   
