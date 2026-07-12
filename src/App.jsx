@@ -1,181 +1,132 @@
-import { useState } from "react"
-import Modal from "./components/Modal"
-import SearchBar from "./components/SearchBar"
-import ProductList from "./components/ProductList"
-import produtos from "./data/produtos"
-import CategoryFilter from "./components/CategoryFilter"
-import Cart from "./components/Cart"
-import "./App.css"
+import { useState, useEffect } from "react";
+import Modal from "./components/Modal";
+import SearchBar from "./components/SearchBar";
+import ProductList from "./components/ProductList";
+import produtos from "./data/produtos";
+import CategoryFilter from "./components/CategoryFilter";
+import Cart from "./components/Cart";
+import "./App.css";
 
 function App() {
+  const [categoria, setCategoria] = useState("Todos");
+  const [busca, setBusca] = useState("");
+  const [produtoSelecionado, setProdutoSelecionado] = useState(null);
+  const [carrinho, setCarrinho] = useState(() => {
+  const carrinhoSalvo = localStorage.getItem("carrinho");
 
-  const [categoria, setCategoria] = useState("Todos")
-  const [busca, setBusca] = useState("")
-  const [produtoSelecionado, setProdutoSelecionado] = useState(null)
-  const [carrinho, setCarrinho] = useState([])
+  return carrinhoSalvo ? JSON.parse(carrinhoSalvo) : [];
+});
 
-  const produtosFiltrados = produtos.filter((produto) =>
-    produto.nome.toLowerCase().includes(busca.toLowerCase()) && 
-    (
-      categoria === "Todos" || 
-      produto.categoria === categoria
-    )
-  )
+useEffect(() => {
 
+  localStorage.setItem("carrinho", JSON.stringify(carrinho));
+}, [carrinho]);
+
+  const produtosFiltrados = produtos.filter(
+    (produto) =>
+      produto.nome.toLowerCase().includes(busca.toLowerCase()) &&
+      (categoria === "Todos" || produto.categoria === categoria),
+  );
 
   function adicionarAoCarrinho(produto) {
-    const produtoEncontrado = carrinho.find((item) => item.id === produto.id) 
-    
-     if (produtoEncontrado) {
+    const produtoEncontrado = carrinho.find((item) => item.id === produto.id);
 
-        setCarrinho(
+    if (produtoEncontrado) {
+      setCarrinho(
+        carrinho.map((item) => {
+          if (item.id === produto.id) {
+            return {
+              ...item,
+              quantidade: item.quantidade + 1,
+            };
+          }
 
-            carrinho.map((item) => {
-
-                if (item.id === produto.id) {
-
-                    return {
-                        ...item, quantidade: item.quantidade + 1
-                    }
-
-                }
-
-                return item
-
-            })
-
-        )
-
+          return item;
+        }),
+      );
     } else {
       setCarrinho([
         ...carrinho,
 
         {
-            ...produto,
-            quantidade: 1
-        }
-      ])
-
+          ...produto,
+          quantidade: 1,
+        },
+      ]);
     }
-
-    // console.log({
-    //   produto,
-    //   produtoEncontrado,
-    //   carrinho
-    // })
   }
 
-
   function diminuirQuantidade(id) {
-
-    const itemEncontrado = carrinho.find((item) => item.id === id)
-
-    // console.log({
-    // idRecebido: id,
-    // itemEncontrado
-    // })
+    const itemEncontrado = carrinho.find((item) => item.id === id);
 
     if (itemEncontrado.quantidade > 1) {
-
-          setCarrinho(
-
-              carrinho.map((item) => {
-
-                  if (item.id === id) {
-
-                      return {
-
-                        ...item,
-                        quantidade: item.quantidade - 1
-                            
-                      }
-
-                  }
-
-                  return item
-
-              })
-
-          )
-
-    } else {
-
       setCarrinho(
+        carrinho.map((item) => {
+          if (item.id === id) {
+            return {
+              ...item,
+              quantidade: item.quantidade - 1,
+            };
+          }
 
-        carrinho.filter((item) => item.id !== id)
-
-
-        )
+          return item;
+        }),
+      );
+    } else {
+      setCarrinho(carrinho.filter((item) => item.id !== id));
     }
-
-      // console.log({
-      //   id,
-      //   itemEncontrado,
-      //   carrinho
-      // })
   }
 
   function limparCarrinho() {
-    setCarrinho([])
+    setCarrinho([]);
   }
-
-  
 
   function removerItem(id) {
     if (confirm("Tem certeza que deseja remover este item?")) {
-
-      setCarrinho(
-        carrinho.filter((item) => item.id !== id)
-      )
-    }  
+      setCarrinho(carrinho.filter((item) => item.id !== id));
+    }
   }
 
-  
-
+  const totalHeader = carrinho.reduce((acumulador, produto) => {
+    return acumulador + produto.quantidade;
+  }, 0);
 
   return (
     <div className="app">
-
       <div className="container">
-
         <header className="header-container">
-          <span>🛒 Carrinho: {carrinho.length}</span>
+          <span>🛒 Carrinho: {totalHeader}</span>
           <h1>Delícias da Lari 🍰</h1>
           <p>Doces artesanais feitos com carinho</p>
         </header>
 
         <SearchBar busca={busca} setBusca={setBusca} />
 
-        <CategoryFilter
-            categoria={categoria}
-            setCategoria={setCategoria}
-        />
+        <CategoryFilter categoria={categoria} setCategoria={setCategoria} />
 
         <ProductList
           produtos={produtosFiltrados}
           onSelecionar={setProdutoSelecionado}
           adicionarAoCarrinho={adicionarAoCarrinho}
         />
-        
-        <Cart 
-          carrinho={carrinho} 
+
+        <Cart
+          carrinho={carrinho}
           diminuirQuantidade={diminuirQuantidade}
           adicionarAoCarrinho={adicionarAoCarrinho}
           limparCarrinho={limparCarrinho}
           removerItem={removerItem}
         />
 
-      {produtoSelecionado && (
-        <Modal
-        produto={produtoSelecionado}
-        onFechar={() => setProdutoSelecionado(null)}
-        />
-      )}
-
+        {produtoSelecionado && (
+          <Modal
+            produto={produtoSelecionado}
+            onFechar={() => setProdutoSelecionado(null)}
+          />
+        )}
       </div>
-
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
