@@ -1,5 +1,8 @@
 import formatPrice from "../utils/formatPrice"
 import "./Cart.css"
+import gerarMensagemWhatsApp from "../utils/gerarMensagemWhatsApp"
+import CartSummary from "./CartSummary"
+
 
 
 function Cart({ carrinho, diminuirQuantidade, adicionarAoCarrinho,limparCarrinho,removerItem }) {
@@ -8,7 +11,10 @@ function Cart({ carrinho, diminuirQuantidade, adicionarAoCarrinho,limparCarrinho
         return acumulador + produto.preco * produto.quantidade
     },0)
 
-    const subtotal = (produto) => produto.preco * produto.quantidade
+    const totalItens = carrinho.reduce((acumulador, produto) => {
+        return acumulador + produto.quantidade
+    },0)
+
 
     if (carrinho.length === 0) {
         return ( 
@@ -22,7 +28,11 @@ function Cart({ carrinho, diminuirQuantidade, adicionarAoCarrinho,limparCarrinho
         <div className="cart">
             <h2>🛒 Carrinho</h2>
 
-            {carrinho.map((produto) => (
+            {carrinho.map((produto) => {
+
+                const subtotal = produto.preco * produto.quantidade;
+
+                return(
                 <div 
                     key={produto.id}
                     className="cart-item"
@@ -55,7 +65,7 @@ function Cart({ carrinho, diminuirQuantidade, adicionarAoCarrinho,limparCarrinho
 
                     <div className="subtotal">
                         <p>
-                            subtotal: {formatPrice(subtotal(produto))}
+                            subtotal: {formatPrice(subtotal)}
                         </p>
                         <button
                             onClick={() => removerItem(produto.id)}
@@ -66,17 +76,26 @@ function Cart({ carrinho, diminuirQuantidade, adicionarAoCarrinho,limparCarrinho
 
                 </div>
             
-            ))}
+                )
 
-            <p className="total">
-                Total: {formatPrice(total)}
-            </p>
+            })}
+
+            <CartSummary
+                total={total}
+                totalItens={totalItens}
+            />
 
             <button
                 className="limparCarrinho"
-                onClick={() => limparCarrinho()}
+                onClick={limparCarrinho}
             >
                 limpar carrinho
+            </button>
+
+            <button type="submit"
+                onClick={() => gerarMensagemWhatsApp(carrinho)}
+            >
+                Finalizar o pedido
             </button>
 
         </div>

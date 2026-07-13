@@ -8,19 +8,24 @@ import Cart from "./components/Cart";
 import "./App.css";
 
 function App() {
+
   const [categoria, setCategoria] = useState("Todos");
+
   const [busca, setBusca] = useState("");
+
   const [produtoSelecionado, setProdutoSelecionado] = useState(null);
+
+
   const [carrinho, setCarrinho] = useState(() => {
-  const carrinhoSalvo = localStorage.getItem("carrinho");
+    const carrinhoSalvo = localStorage.getItem("carrinho");
 
   return carrinhoSalvo ? JSON.parse(carrinhoSalvo) : [];
-});
+  });
 
-useEffect(() => {
+  useEffect(() => {
 
-  localStorage.setItem("carrinho", JSON.stringify(carrinho));
-}, [carrinho]);
+    localStorage.setItem("carrinho", JSON.stringify(carrinho));
+  }, [carrinho]);
 
   const produtosFiltrados = produtos.filter(
     (produto) =>
@@ -29,35 +34,39 @@ useEffect(() => {
   );
 
   function adicionarAoCarrinho(produto) {
-    const produtoEncontrado = carrinho.find((item) => item.id === produto.id);
+  setCarrinho((carrinhoAtual) => {
+
+    const produtoEncontrado = carrinhoAtual.find(
+      (item) => item.id === produto.id
+    );
 
     if (produtoEncontrado) {
-      setCarrinho(
-        carrinho.map((item) => {
-          if (item.id === produto.id) {
-            return {
-              ...item,
-              quantidade: item.quantidade + 1,
-            };
-          }
+      return carrinhoAtual.map((item) => {
+        if (item.id === produto.id) {
+          return {
+            ...item,
+            quantidade: item.quantidade + 1,
+          };
+        }
 
-          return item;
-        }),
-      );
-    } else {
-      setCarrinho([
-        ...carrinho,
-
-        {
-          ...produto,
-          quantidade: 1,
-        },
-      ]);
+        return item;
+      });
     }
-  }
+
+    return [
+      ...carrinhoAtual,
+      {
+        ...produto,
+        quantidade: 1,
+      },
+    ];
+  });
+}
 
   function diminuirQuantidade(id) {
     const itemEncontrado = carrinho.find((item) => item.id === id);
+
+    if (!itemEncontrado) return;
 
     if (itemEncontrado.quantidade > 1) {
       setCarrinho(
@@ -78,9 +87,10 @@ useEffect(() => {
   }
 
   function limparCarrinho() {
-    setCarrinho([]);
+    if (confirm("Tem certeza que deseja remover tudo no carrinho?")) {
+      setCarrinho([]); 
   }
-
+}
   function removerItem(id) {
     if (confirm("Tem certeza que deseja remover este item?")) {
       setCarrinho(carrinho.filter((item) => item.id !== id));
