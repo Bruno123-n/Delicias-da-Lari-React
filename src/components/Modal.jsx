@@ -18,7 +18,13 @@ function Modal({ produto, onFechar }) {
           src={produto.imagem}
           alt={produto.nome}
         />
-        <p>Preço: {formatPrice(produto.preco)}
+
+        <p>
+          Categoria: {produto.categoria}
+        </p>
+
+        <p>
+          Preço: {formatPrice(produto.preco)}
         </p>
 
         <button onClick={onFechar}>
