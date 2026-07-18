@@ -92,7 +92,8 @@ function Cart({ carrinho, diminuirQuantidade, adicionarAoCarrinho,limparCarrinho
                 limpar carrinho
             </button>
 
-            <button type="submit"
+            <button 
+                type="submit"
                 onClick={() => gerarMensagemWhatsApp(carrinho)}
             >
                 Finalizar o pedido

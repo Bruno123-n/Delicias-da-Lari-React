@@ -5,9 +5,12 @@ import ProductList from "./components/ProductList";
 import produtos from "./data/produtos";
 import CategoryFilter from "./components/CategoryFilter";
 import Cart from "./components/Cart";
+import ConfirmModal from "./components/ConfirmModal";
 import "./App.css";
 
 function App() {
+
+  const [confirmacao, setConfirmacao] = useState(null);
 
   const [categoria, setCategoria] = useState("Todos");
 
@@ -86,11 +89,21 @@ function App() {
     }
   }
 
-  function limparCarrinho() {
-    if (confirm("Tem certeza que deseja remover tudo no carrinho?")) {
-      setCarrinho([]); 
-  }
+function abrirConfirmacao(acao) {
+
+  setConfirmacao(acao);
+
 }
+
+function limparCarrinho() {
+  abrirConfirmacao({
+    titulo: "Limpar carrinho",
+    mensagem:"Deseja limpar o carrinho?",
+    executar: () => setCarrinho([])
+  });
+}
+
+
   function removerItem(id) {
     if (confirm("Tem certeza que deseja remover este item?")) {
       setCarrinho(carrinho.filter((item) => item.id !== id));
@@ -133,6 +146,20 @@ function App() {
             produto={produtoSelecionado}
             onFechar={() => setProdutoSelecionado(null)}
           />
+        )}
+
+        {confirmacao && (
+        <ConfirmModal
+          titulo={confirmacao.titulo}
+          mensagem={confirmacao.mensagem}
+          onConfirmar={()=>{
+            confirmacao.executar();
+            setConfirmacao(null);
+          }}
+
+          onCancelar={() => setConfirmacao(null)}
+
+        />
         )}
       </div>
     </div>
