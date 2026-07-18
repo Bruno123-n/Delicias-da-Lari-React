@@ -6,6 +6,7 @@ import produtos from "./data/produtos";
 import CategoryFilter from "./components/CategoryFilter";
 import Cart from "./components/Cart";
 import ConfirmModal from "./components/ConfirmModal";
+import gerarMensagemWhatsApp from "./utils/gerarMensagemWhatsApp"
 import "./App.css";
 
 function App() {
@@ -103,6 +104,25 @@ function limparCarrinho() {
   });
 }
 
+function finalizarPedido(carrinho) {
+
+    abrirConfirmacao({
+
+        titulo: "Finalizar Pedido",
+
+        mensagem: "Deseja finalizar o pedido",
+
+        executar: () => {
+
+            gerarMensagemWhatsApp(carrinho)
+            setCarrinho([])
+
+        }
+
+    });
+
+}
+
 
   function removerItem(id) {
     if (confirm("Tem certeza que deseja remover este item?")) {
@@ -139,6 +159,7 @@ function limparCarrinho() {
           adicionarAoCarrinho={adicionarAoCarrinho}
           limparCarrinho={limparCarrinho}
           removerItem={removerItem}
+          finalizarPedido={finalizarPedido}
         />
 
         {produtoSelecionado && (
@@ -161,6 +182,7 @@ function limparCarrinho() {
 
         />
         )}
+        
       </div>
     </div>
   );

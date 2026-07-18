@@ -1,11 +1,10 @@
 import formatPrice from "../utils/formatPrice"
 import "./Cart.css"
-import gerarMensagemWhatsApp from "../utils/gerarMensagemWhatsApp"
 import CartSummary from "./CartSummary"
 
 
 
-function Cart({ carrinho, diminuirQuantidade, adicionarAoCarrinho,limparCarrinho,removerItem }) {
+function Cart({ carrinho, diminuirQuantidade, adicionarAoCarrinho,limparCarrinho,removerItem,finalizarPedido }) {
 
     const total = carrinho.reduce((acumulador, produto) => {
         return acumulador + produto.preco * produto.quantidade
@@ -94,7 +93,7 @@ function Cart({ carrinho, diminuirQuantidade, adicionarAoCarrinho,limparCarrinho
 
             <button 
                 type="submit"
-                onClick={() => gerarMensagemWhatsApp(carrinho)}
+                onClick={() => finalizarPedido(carrinho)}
             >
                 Finalizar o pedido
             </button>
