@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Modal from "./components/Modal";
+// import Modal from "./components/Modal";
 import SearchBar from "./components/SearchBar";
 import ProductList from "./components/ProductList";
 import produtos from "./data/produtos";
@@ -7,6 +7,7 @@ import CategoryFilter from "./components/CategoryFilter";
 import Cart from "./components/Cart";
 import ConfirmModal from "./components/ConfirmModal";
 import gerarMensagemWhatsApp from "./utils/gerarMensagemWhatsApp"
+import ProductDetails from "./components/ProductDetails"
 import "./App.css";
 
 function App() {
@@ -143,15 +144,25 @@ function finalizarPedido(carrinho) {
           <p>Doces artesanais feitos com carinho</p>
         </header>
 
-        <SearchBar busca={busca} setBusca={setBusca} />
+        {produtoSelecionado ? (
+          <ProductDetails
+            produto={produtoSelecionado}
+            onVoltar={() => setProdutoSelecionado(null)}
+            adicionarAoCarrinho={adicionarAoCarrinho}
+          />
+        ) :( 
+          <>
+            <SearchBar busca={busca} setBusca={setBusca} />
 
-        <CategoryFilter categoria={categoria} setCategoria={setCategoria} />
+            <CategoryFilter categoria={categoria} setCategoria={setCategoria} />
 
-        <ProductList
-          produtos={produtosFiltrados}
-          onSelecionar={setProdutoSelecionado}
-          adicionarAoCarrinho={adicionarAoCarrinho}
-        />
+            <ProductList
+              produtos={produtosFiltrados}
+              onSelecionar={setProdutoSelecionado}
+              adicionarAoCarrinho={adicionarAoCarrinho}
+            />
+          </>
+        )}
 
         <Cart
           carrinho={carrinho}
@@ -162,12 +173,12 @@ function finalizarPedido(carrinho) {
           finalizarPedido={finalizarPedido}
         />
 
-        {produtoSelecionado && (
+        {/* {produtoSelecionado && (
           <Modal
             produto={produtoSelecionado}
             onFechar={() => setProdutoSelecionado(null)}
           />
-        )}
+        )} */}
 
         {confirmacao && (
         <ConfirmModal
