@@ -19,11 +19,13 @@ function ProductCard({ produto, onSelecionar, adicionarAoCarrinho }) {
       </h3>
 
       <p className="rating">
+        Avaliação:
         {estrelas.map((estrela) => 
           <span key={estrela}>
             {estrela <= produto.avaliacao ? "⭐" : "☆"}
           </span>
         )}
+        ({produto.avaliacao})
       </p>
 
       <p className="description">
