@@ -1,10 +1,12 @@
+import { useState } from "react";
 import formatPrice from "../utils/formatPrice";
+import ProductRating from "./ProductRating";
 import "./ProductDetails.css";
 
-const estrelas = [1, 2, 3, 4, 5]
 
 function ProductDetails({ produto, onVoltar, adicionarAoCarrinho }) {
-  return (
+    const [itemAdicionado, setItemAdicionado] = useState(false)
+    return (
     <div className="product-details">
 
         <div className="imagem">
@@ -27,25 +29,33 @@ function ProductDetails({ produto, onVoltar, adicionarAoCarrinho }) {
                 {produto.descricao}
             </p>
 
-            <p className="rating">
-                {estrelas.map((estrela) => 
-                <span key={estrela}>
-                    {estrela <= produto.avaliacao ? "⭐" : "☆"}
-                </span>
-                )}
-            </p>
+            <ProductRating avaliacao={produto.avaliacao}/>
             <p>
                 Preço: {formatPrice(produto.preco)}
             </p>
         
 
             <div className="acoes">
-                <button
+                {itemAdicionado ?
+                (<button
                     className="addCarrinho"
-                    onClick={() => adicionarAoCarrinho(produto)}
+                >
+                   ✔ Produto adicionado
+                </button>) :
+                
+                (<button
+                    className="addCarrinho"
+                    onClick={() => {
+                        adicionarAoCarrinho(produto)
+                        setItemAdicionado(true)
+                        setTimeout(() => {
+                            setItemAdicionado(false)
+                        }, 2000);
+                    }}
                 >
                     Adicionar ao carrinho
                 </button>
+            )}
                 <button
                     className="voltar"
                     onClick={onVoltar}
@@ -56,7 +66,7 @@ function ProductDetails({ produto, onVoltar, adicionarAoCarrinho }) {
         </div>
 
     </div>
-  );
+    );
 }
 
 export default ProductDetails;

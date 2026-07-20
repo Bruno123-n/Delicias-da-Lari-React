@@ -1,7 +1,7 @@
 import formatPrice from "../utils/formatPrice"
+import ProductRating from "./ProductRating";
 import "./ProductCard.css"
 
-const estrelas = [1, 2, 3, 4, 5]
 
 function ProductCard({ produto, onSelecionar, adicionarAoCarrinho }) {
   return (
@@ -18,15 +18,7 @@ function ProductCard({ produto, onSelecionar, adicionarAoCarrinho }) {
         {produto.nome}
       </h3>
 
-      <p className="rating">
-        Avaliação:
-        {estrelas.map((estrela) => 
-          <span key={estrela}>
-            {estrela <= produto.avaliacao ? "⭐" : "☆"}
-          </span>
-        )}
-        ({produto.avaliacao})
-      </p>
+      <ProductRating avaliacao={produto.avaliacao}/>
 
       <p className="description">
         {produto.descricao}
