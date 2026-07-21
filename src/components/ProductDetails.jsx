@@ -1,72 +1,36 @@
-import { useState } from "react";
-import formatPrice from "../utils/formatPrice";
+import ProductInfo from "./ProductInfo";
 import ProductRating from "./ProductRating";
-import "./ProductDetails.css";
+import ProductActions from "./ProductActions";
 
 
-function ProductDetails({ produto, onVoltar, adicionarAoCarrinho }) {
-    const [itemAdicionado, setItemAdicionado] = useState(false)
-    return (
-    <div className="product-details">
+function ProductDetails({
+    produto,
+    onVoltar,
+    adicionarAoCarrinho
+}) {
 
-        <div className="imagem">
-            <img
-                src={produto.imagem}
-                alt={produto.nome}
-            />
-        </div>
+return (
 
-        <div className="informacoes">
-            <h2>
-                {produto.nome}
-            </h2>
+<div className="product-details">
 
-            <p className="categoria">
-                Categoria: {produto.categoria}
-            </p>
+    <ProductInfo 
+        produto={produto}
+    />
 
-            <p className="descricao">
-                {produto.descricao}
-            </p>
+    <ProductRating
+        avaliacao={produto.avaliacao}
+    />
 
-            <ProductRating avaliacao={produto.avaliacao}/>
-            <p>
-                Preço: {formatPrice(produto.preco)}
-            </p>
-        
+    <ProductActions
+        produto={produto}
+        onVoltar={onVoltar}
+        adicionarAoCarrinho={adicionarAoCarrinho}
+    />
 
-            <div className="acoes">
-                {itemAdicionado ?
-                (<button
-                    className="addCarrinho"
-                >
-                   ✔ Produto adicionado
-                </button>) :
-                
-                (<button
-                    className="addCarrinho"
-                    onClick={() => {
-                        adicionarAoCarrinho(produto)
-                        setItemAdicionado(true)
-                        setTimeout(() => {
-                            setItemAdicionado(false)
-                        }, 2000);
-                    }}
-                >
-                    Adicionar ao carrinho
-                </button>
-            )}
-                <button
-                    className="voltar"
-                    onClick={onVoltar}
-                >   
-                    <span className="seta">&larr;</span> Voltar
-                </button>
-            </div>
-        </div>
+</div>
 
-    </div>
-    );
+)
+
 }
 
-export default ProductDetails;
+export default ProductDetails
