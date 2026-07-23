@@ -1,40 +1,4 @@
-/* Fundo escuro que cobre a tela inteira */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro transparente */
-  backdrop-filter: blur(3px); /* Desfoca levemente o fundo da loja */
-  display: flex;
-  justify-content: center; /* Centraliza na horizontal */
-  align-items: center;     /* Centraliza na vertical */
-  z-index: 1000;
-  padding: 15px;
-}
-
-/* Caixinha do Modal */
-.modal {
-  background: #ffffff; /* Fundo branco fica bem profissional */
-  color: #333333;
-  width: 90%;
-  max-width: 380px; /* Não passa de 400px, mas encolhe no celular se precisar */
-  box-sizing: border-box;
-  padding: 25px;
-  border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 20px;
-
-  /* Animação de entrada */
-  animation: abrirModal 0.3s ease-out;
-}
-
-/* Título */
+/* Título do Modal de Confirmação */
 .titulo {
   font-size: 22px;
   font-weight: bold;
@@ -42,14 +6,14 @@
   margin: 0;
 }
 
-/* Mensagem */
+/* Mensagem de texto */
 .mensagem {
   font-size: 16px;
   color: #555555;
   margin: 0;
 }
 
-/* Conteiner dos botões */
+/* Contêiner dos botões */
 .acao {
   display: flex;
   justify-content: center;
@@ -58,7 +22,7 @@
   margin-top: 10px;
 }
 
-/* Estilo geral dos botões */
+/* Estilo dos botões */
 .acao button {
   padding: 12px 20px;
   min-width: 100px;
@@ -71,10 +35,9 @@
 }
 
 .acao button:active {
-  transform: scale(0.95); /* Efeito de clique afundando */
+  transform: scale(0.95);
 }
 
-/* Botão Cancelar */
 .acao .Cancelar {
   background-color: #e0e0e0;
   color: #333;
@@ -84,24 +47,11 @@
   background-color: #d0d0d0;
 }
 
-/* Botão Confirmar */
 .acao .Confirmar {
-  background-color: #e63946; /* Vermelho destacado ou rosa da doceria */
+  background-color: #e63946;
   color: white;
 }
 
 .acao .Confirmar:hover {
   background-color: #d62828;
-}
-
-/* Animação suave para o modal surgindo de baixo para cima */
-@keyframes abrirModal {
-  from {
-    opacity: 0;
-    transform: translateY(20px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
 }

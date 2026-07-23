@@ -173,13 +173,6 @@ function finalizarPedido(carrinho) {
           finalizarPedido={finalizarPedido}
         />
 
-        {/* {produtoSelecionado && (
-          <Modal
-            produto={produtoSelecionado}
-            onFechar={() => setProdutoSelecionado(null)}
-          />
-        )} */}
-
         {confirmacao && (
         <ConfirmModal
           titulo={confirmacao.titulo}

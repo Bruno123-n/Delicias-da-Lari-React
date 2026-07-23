@@ -1,3 +1,4 @@
+import Modal from "./Modal";
 import "./ConfirmModal.css"
 
 function ConfirmModal({
@@ -8,31 +9,35 @@ function ConfirmModal({
 }) {
 
   return (
-    <div 
-      className="modal-overlay"
-      onClick={onCancelar}
-    >
+    <Modal isOpen={true} onClose={onCancelar}>
 
-      <div 
-        className="modal"
-        onClick={(e) => e.stopPropagation()}
+      <h2
+        className="titulo"
       >
+        {titulo}
+      </h2>
+      <p
+        className="mensagem"
+      >
+        {mensagem}
+      </p>
 
-        <h2>{titulo}</h2>
+      <div className="acao">
 
-        <p>{mensagem}</p>
-
-        <button onClick={onCancelar}>
+        <button
+          className="Cancelar"
+          onClick={onCancelar}
+        >
           Cancelar
         </button>
-
-        <button onClick={onConfirmar}>
+        <button
+          className="Confirmar"
+          onClick={onConfirmar}
+        >
           Confirmar
         </button>
-
       </div>
-
-    </div>
+    </Modal>
     
   )
 }

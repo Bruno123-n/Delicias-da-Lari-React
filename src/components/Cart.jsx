@@ -38,7 +38,7 @@ function Cart({ carrinho, diminuirQuantidade, adicionarAoCarrinho,limparCarrinho
                 >
 
                     <div className="descricao">
-                        <p>
+                        <p className="produtoNome">
                             {produto.nome}
                         </p>
                         <p>
@@ -84,19 +84,21 @@ function Cart({ carrinho, diminuirQuantidade, adicionarAoCarrinho,limparCarrinho
                 totalItens={totalItens}
             />
 
-            <button
-                className="limparCarrinho"
-                onClick={limparCarrinho}
-            >
-                limpar carrinho
-            </button>
-
-            <button 
-                type="submit"
-                onClick={() => finalizarPedido(carrinho)}
-            >
-                Finalizar o pedido
-            </button>
+            <div className="cart-actions">
+                <button
+                    className="limparCarrinho"
+                    onClick={limparCarrinho}
+                >
+                    limpar carrinho
+                </button>
+                <button
+                    className="finalizarPedido"
+                    type="submit"
+                    onClick={() => finalizarPedido(carrinho)}
+                >
+                    Finalizar o pedido
+                </button>
+            </div>
 
         </div>
     )

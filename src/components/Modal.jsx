@@ -1,35 +1,23 @@
-import formatPrice from "../utils/formatPrice"
 import "./Modal.css"
 
-function Modal({ produto, onFechar }) {
+function Modal({ isOpen, onClose, children}) {
+
+  if (!(isOpen)) return null
+
   return (
     <div 
       className="modal-overlay" 
-      onClick={onFechar}
+      onClick={onClose}
     >
 
       <div 
         className="modal" 
         onClick={(e) => e.stopPropagation()}
       >
-        <h2>{produto.nome}</h2>
-        <img
-          className="modal-image"
-          src={produto.imagem}
-          alt={produto.nome}
-        />
 
-        <p>
-          Categoria: {produto.categoria}
-        </p>
-
-        <p>
-          Preço: {formatPrice(produto.preco)}
-        </p>
-
-        <button onClick={onFechar}>
-          Fechar
-        </button>
+        {children}
+      
+   
       </div>
     </div>
   )
