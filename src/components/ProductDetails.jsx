@@ -1,6 +1,7 @@
 import ProductInfo from "./ProductInfo";
 import ProductRating from "./ProductRating";
 import ProductActions from "./ProductActions";
+import "./ProductDetails.css";
 
 
 function ProductDetails({
@@ -17,15 +18,16 @@ return (
         produto={produto}
     />
 
-    <ProductRating
-        avaliacao={produto.avaliacao}
-    />
-
-    <ProductActions
-        produto={produto}
-        onVoltar={onVoltar}
-        adicionarAoCarrinho={adicionarAoCarrinho}
-    />
+    <div className="detalhes-coluna-direita">
+        <ProductRating
+            avaliacao={produto.avaliacao}
+        />
+        <ProductActions
+            produto={produto}
+            onVoltar={onVoltar}
+            adicionarAoCarrinho={adicionarAoCarrinho}
+        />
+    </div>
 
 </div>
 

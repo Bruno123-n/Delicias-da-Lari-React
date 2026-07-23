@@ -1,7 +1,11 @@
 .product-details {
   display: flex;
-  gap: 20px;
+  gap: 30px;
   justify-content: center;
+  align-items: flex-start;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 .product-details img {
@@ -14,29 +18,47 @@
 .informacoes {
   display: flex;
   flex-direction: column;
-  gap: 25px;
-  font-size: 22px;
+  gap: 15px;
+  font-size: 18px;
   color: rgb(124, 47, 47);
 }
 
 .informacoes h2 {
-  font-size: 42px;
-  margin-top: 15px;
+  font-size: 36px;
+  margin: 0;
   color: rgb(109, 32, 32);
 }
 
+.detalhes-coluna-direita {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+}
+
 .rating span{
-  font-size: 30px;
+  font-size: 24px;
 }
 
 .acoes {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
+  margin-top: 10px;
 }
 
 .acoes button {
   border-radius: 10px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background 0.2s;
+}
+
+.addCarrinho {
+  padding: 12px;
+  background: #dc133e;
 }
 
 .addCarrinho:hover {
@@ -44,23 +66,17 @@
   cursor: pointer;
 }
 
+.voltar {
+  padding: 10px;
+  background: #e82c54;
+}
+
 .voltar:hover {
   background: #be123d;;
   cursor: pointer;
 }
 
-.addCarrinho {
-  padding: 10px;
-  background: #dc133e;
-
-}
-
-.voltar {
-  padding: 5px;
-  background: #e82c54;
-}
-
 .seta {
-  font-size: 25px;
-  margin:15px
+  font-size: 20px;
+  margin-right: 8px;
 }
