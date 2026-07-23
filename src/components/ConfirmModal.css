@@ -18,8 +18,9 @@
 .modal {
   background: #ffffff; /* Fundo branco fica bem profissional */
   color: #333333;
-  width: 100%;
-  max-width: 400px; /* Não passa de 400px, mas encolhe no celular se precisar */
+  width: 90%;
+  max-width: 380px; /* Não passa de 400px, mas encolhe no celular se precisar */
+  box-sizing: border-box;
   padding: 25px;
   border-radius: 16px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
@@ -59,7 +60,8 @@
 
 /* Estilo geral dos botões */
 .acao button {
-  padding: 10px 20px;
+  padding: 12px 20px;
+  min-width: 100px;
   border-radius: 8px;
   border: none;
   font-size: 15px;
