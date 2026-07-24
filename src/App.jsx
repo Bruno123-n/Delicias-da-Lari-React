@@ -105,7 +105,7 @@ function limparCarrinho() {
   });
 }
 
-function finalizarPedido(carrinho) {
+function finalizarPedido(carrinho, endereco) {
 
     abrirConfirmacao({
 
@@ -115,7 +115,7 @@ function finalizarPedido(carrinho) {
 
         executar: () => {
 
-            gerarMensagemWhatsApp(carrinho)
+            gerarMensagemWhatsApp(carrinho, endereco)
             setCarrinho([])
 
         }
