@@ -1,37 +1,100 @@
+/* Base e Responsividade da Página */
 .app {
   text-align: center;
   background: #f6ade4;
   min-height: 100vh;
-  padding: 40px;
+  padding: 20px; /* Reduzido de 40px para aproveitar melhor a tela */
 }
 
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
+/* Header Principal */
 .header-container {
+  position: relative;
   background: #ff69b4;
-  padding: 35px;
+  padding: 30px 20px 20px 20px;
   border-radius: 20px;
   color: white;
   margin-bottom: 20px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
-.header-container p {
-  font-size: 1.2rem;
-  opacity: 0.9;
+/* Badge do Carrinho no Topo */
+.cart-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.25);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+  backdrop-filter: blur(4px);
 }
 
 .header-container h1 {
-  font-size: 3rem;
-  margin-bottom: 10px;
+  font-size: 2.2rem;
+  margin: 0 0 8px 0;
+  line-height: 1.2;
+}
+
+.header-container p {
+  font-size: 1rem;
+  opacity: 0.95;
+  margin: 0;
 }
 
 .busca {
   padding: 10px;
   border-radius: 8px;
   border: 1px solid #ddd;
-  width: 250px;
+  width: 100%;
+  max-width: 320px;
+}
+
+.toast-notificacao {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #2e7d32; /* Verde suave de sucesso */
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 1000;
+  animation: subirAparecer 0.3s ease-in-out;
+}
+
+@keyframes subirAparecer {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* 📱 AJUSTES ESPECÍFICOS PARA CELULAR */
+@media (max-width: 768px) {
+  .app {
+    padding: 12px; /* Margem lateral menor no celular */
+  }
+
+  .header-container {
+    padding: 20px 15px;
+    border-radius: 16px;
+  }
+
+  .header-container h1 {
+    font-size: 1.6rem; /* Tamanho proporcional para tela pequena */
+  }
+
+  .header-container p {
+    font-size: 0.88rem;
+  }
 }

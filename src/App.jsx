@@ -6,11 +6,12 @@ import produtos from "./data/produtos";
 import CategoryFilter from "./components/CategoryFilter";
 import Cart from "./components/Cart";
 import ConfirmModal from "./components/ConfirmModal";
-import gerarMensagemWhatsApp from "./utils/gerarMensagemWhatsApp"
-import ProductDetails from "./components/ProductDetails"
+import gerarMensagemWhatsApp from "./utils/gerarMensagemWhatsApp";
+import ProductDetails from "./components/ProductDetails";
 import "./App.css";
 
 function App() {
+  const [mensagemToast, setMensagemToast] = useState("");
 
   const [confirmacao, setConfirmacao] = useState(null);
 
@@ -20,15 +21,21 @@ function App() {
 
   const [produtoSelecionado, setProdutoSelecionado] = useState(null);
 
+  function mostrarToast(mensagem) {
+    setMensagemToast(mensagem);
+
+    setTimeout(() => {
+      setMensagemToast("");
+    }, 2500);
+  }
 
   const [carrinho, setCarrinho] = useState(() => {
     const carrinhoSalvo = localStorage.getItem("carrinho");
 
-  return carrinhoSalvo ? JSON.parse(carrinhoSalvo) : [];
+    return carrinhoSalvo ? JSON.parse(carrinhoSalvo) : [];
   });
 
   useEffect(() => {
-
     localStorage.setItem("carrinho", JSON.stringify(carrinho));
   }, [carrinho]);
 
@@ -39,34 +46,34 @@ function App() {
   );
 
   function adicionarAoCarrinho(produto) {
-  setCarrinho((carrinhoAtual) => {
+    setCarrinho((carrinhoAtual) => {
+      const produtoEncontrado = carrinhoAtual.find(
+        (item) => item.id === produto.id,
+      );
 
-    const produtoEncontrado = carrinhoAtual.find(
-      (item) => item.id === produto.id
-    );
+      if (produtoEncontrado) {
+        return carrinhoAtual.map((item) => {
+          if (item.id === produto.id) {
+            return {
+              ...item,
+              quantidade: item.quantidade + 1,
+            };
+          }
 
-    if (produtoEncontrado) {
-      return carrinhoAtual.map((item) => {
-        if (item.id === produto.id) {
-          return {
-            ...item,
-            quantidade: item.quantidade + 1,
-          };
-        }
+          return item;
+        });
+      }
 
-        return item;
-      });
-    }
-
-    return [
-      ...carrinhoAtual,
-      {
-        ...produto,
-        quantidade: 1,
-      },
-    ];
-  });
-}
+      return [
+        ...carrinhoAtual,
+        {
+          ...produto,
+          quantidade: 1,
+        },
+      ];
+    });
+    mostrarToast(`${produto.nome} adicionado ao carrinho! 🍰`);
+  }
 
   function diminuirQuantidade(id) {
     const itemEncontrado = carrinho.find((item) => item.id === id);
@@ -91,39 +98,30 @@ function App() {
     }
   }
 
-function abrirConfirmacao(acao) {
+  function abrirConfirmacao(acao) {
+    setConfirmacao(acao);
+  }
 
-  setConfirmacao(acao);
-
-}
-
-function limparCarrinho() {
-  abrirConfirmacao({
-    titulo: "Limpar carrinho",
-    mensagem:"Deseja limpar o carrinho?",
-    executar: () => setCarrinho([])
-  });
-}
-
-function finalizarPedido(carrinho, endereco) {
-
+  function limparCarrinho() {
     abrirConfirmacao({
-
-        titulo: "Finalizar Pedido",
-
-        mensagem: "Deseja finalizar o pedido",
-
-        executar: () => {
-
-            gerarMensagemWhatsApp(carrinho, endereco)
-            setCarrinho([])
-
-        }
-
+      titulo: "Limpar carrinho",
+      mensagem: "Deseja limpar o carrinho?",
+      executar: () => setCarrinho([]),
     });
+  }
 
-}
+  function finalizarPedido(carrinho, endereco) {
+    abrirConfirmacao({
+      titulo: "Finalizar Pedido",
 
+      mensagem: "Deseja finalizar o pedido",
+
+      executar: () => {
+        gerarMensagemWhatsApp(carrinho, endereco);
+        setCarrinho([]);
+      },
+    });
+  }
 
   function removerItem(id) {
     if (confirm("Tem certeza que deseja remover este item?")) {
@@ -139,7 +137,9 @@ function finalizarPedido(carrinho, endereco) {
     <div className="app">
       <div className="container">
         <header className="header-container">
-          <span>🛒 Carrinho: {totalHeader}</span>
+          <div className="cart-badge">
+            🛒 Carrinho: <span>{totalHeader}</span>
+          </div>
           <h1>Delícias da Lari 🍰</h1>
           <p>Doces artesanais feitos com carinho</p>
         </header>
@@ -150,7 +150,7 @@ function finalizarPedido(carrinho, endereco) {
             onVoltar={() => setProdutoSelecionado(null)}
             adicionarAoCarrinho={adicionarAoCarrinho}
           />
-        ) :( 
+        ) : (
           <>
             <SearchBar busca={busca} setBusca={setBusca} />
 
@@ -174,19 +174,19 @@ function finalizarPedido(carrinho, endereco) {
         />
 
         {confirmacao && (
-        <ConfirmModal
-          titulo={confirmacao.titulo}
-          mensagem={confirmacao.mensagem}
-          onConfirmar={()=>{
-            confirmacao.executar();
-            setConfirmacao(null);
-          }}
-
-          onCancelar={() => setConfirmacao(null)}
-
-        />
+          <ConfirmModal
+            titulo={confirmacao.titulo}
+            mensagem={confirmacao.mensagem}
+            onConfirmar={() => {
+              confirmacao.executar();
+              setConfirmacao(null);
+            }}
+            onCancelar={() => setConfirmacao(null)}
+          />
         )}
-        
+        {mensagemToast && (
+          <div className="toast-notificacao">{mensagemToast}</div>
+        )}
       </div>
     </div>
   );

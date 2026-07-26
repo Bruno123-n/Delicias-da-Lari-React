@@ -96,6 +96,7 @@ function AddressForm({ onEnderecoChange }) {
         <label>Cidade / UF:</label>
         <input type="text" value={cidade} readOnly placeholder="Preenchido via CEP" />
       </div>
+      <div></div>
     </div>
   );
 }
