@@ -68,6 +68,38 @@
   animation: subirAparecer 0.3s ease-in-out;
 }
 
+.input-observacao {
+   width: 100%;                  /*Ocupa a largura inteira da caixa */
+   box-sizing: border-box;       /*Garante que o padding não passe do limite do card */
+   padding: 10px 12px;           /*Espaçamento interno confortável */
+   margin-top: 10px;             /*Afasta do botão 'Ver detalhes' */
+   margin-bottom: 12px;         /*Empurra o botão 'Adicionar ao carrinho' para baixo */
+  
+   background-color: #ffffff;    /*Fundo branco limpo */
+   color: #333333;               /*Texto digitado em cinza escuro */
+  
+   border: 1px solid #e0e0e0;    /*Borda cinza bem suave */
+   border-radius: 8px;          /*Cantos arredondados combinando com o card */
+   font-size: 0.85rem;          /*Letra num tamanho confortável */
+   font-family: inherit;         /*Usa a mesma fonte do resto da página */
+  
+   height: 65px;                /*Altura inicial ideal para ler o placeholder */
+   resize: none;                /*Impede o usuário de esticar e quebrar o layout */
+   outline: none;               /*Tira a linha padrão do navegador */
+   transition: border-color 0.2s;/*Transição suave ao clicar */
+}
+
+/* Estilização do texto de exemplo (Placeholder) */
+.input-observacao::placeholder {
+   color: #999999;               /*Cor cinza clara legível para o exemplo */
+}
+
+.input-observacao:focus {
+   border-color: #e91e63;       /*Borda rosa quando o usuário clica */
+   box-shadow: 0 0 0 2px rgba(233, 30, 99, 0.1); /*Brilho rosa bem sutil */
+}
+
+
 @keyframes subirAparecer {
   from {
     transform: translateY(20px);

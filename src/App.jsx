@@ -10,6 +10,7 @@ import gerarMensagemWhatsApp from "./utils/gerarMensagemWhatsApp";
 import ProductDetails from "./components/ProductDetails";
 import "./App.css";
 
+
 function App() {
   const [mensagemToast, setMensagemToast] = useState("");
 
@@ -47,9 +48,9 @@ function App() {
 
   function adicionarAoCarrinho(produto) {
     setCarrinho((carrinhoAtual) => {
+
       const produtoEncontrado = carrinhoAtual.find(
-        (item) => item.id === produto.id,
-      );
+        (item) => item.id === produto.id);
 
       if (produtoEncontrado) {
         return carrinhoAtual.map((item) => {
@@ -110,14 +111,14 @@ function App() {
     });
   }
 
-  function finalizarPedido(carrinho, endereco) {
+  function finalizarPedido(carrinho, endereco, observacaoGeral) {
     abrirConfirmacao({
       titulo: "Finalizar Pedido",
 
       mensagem: "Deseja finalizar o pedido",
 
       executar: () => {
-        gerarMensagemWhatsApp(carrinho, endereco);
+        gerarMensagemWhatsApp(carrinho, endereco, observacaoGeral);
         setCarrinho([]);
       },
     });

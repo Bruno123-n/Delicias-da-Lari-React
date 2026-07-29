@@ -13,6 +13,7 @@ function Cart({
   finalizarPedido,
 }) {
   const [endereco, setEndereco] = useState(null);
+  const [observacaoGeral, setObservacaoGeral] = useState("");
 
   const total = carrinho.reduce((acumulador, produto) => {
     return acumulador + produto.preco * produto.quantidade;
@@ -60,6 +61,15 @@ function Cart({
         );
       })}
 
+      <div className="cart-obs">
+        <textarea
+          placeholder="Alguma observação para o pedido? (ex: sem açúcar, entregar depois das 14h...)"
+          value={observacaoGeral}
+          onChange={(e) => setObservacaoGeral(e.target.value)}
+          className="input-observacao"
+        />
+      </div>
+
       <CartSummary total={total} totalItens={totalItens} />
 
       <AddressForm
@@ -73,7 +83,7 @@ function Cart({
         <button
           className="finalizarPedido"
           type="submit"
-          onClick={() => finalizarPedido(carrinho, endereco)}
+          onClick={() => finalizarPedido(carrinho, endereco, observacaoGeral)}
         >
           Finalizar o pedido
         </button>
