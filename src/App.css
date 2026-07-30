@@ -130,3 +130,35 @@
     font-size: 0.88rem;
   }
 }
+@media (max-width: 480px) {
+
+  body, .container {
+    padding: 10px;
+  }
+
+  .grid-produtos, .lista-produtos {
+    grid-template-columns: 1fr !important;
+    gap: 15px;
+  }
+
+  .card {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .cart {
+    width: 95% !important;
+    max-width: none;
+    padding: 15px;
+    margin: 10px auto;
+  }
+
+  button {
+    padding: 12px;
+    font-size: 1rem;
+  }
+
+  .busca {
+    max-width: 100%;
+  }
+}
