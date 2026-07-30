@@ -107,7 +107,10 @@ function App() {
     abrirConfirmacao({
       titulo: "Limpar carrinho",
       mensagem: "Deseja limpar o carrinho?",
-      executar: () => setCarrinho([]),
+      executar: () => {
+        setCarrinho([])
+        mostrarToast("Carrinho limpo com sucesso! 🧹")
+      },
     });
   }
 
@@ -118,16 +121,25 @@ function App() {
       mensagem: "Deseja finalizar o pedido",
 
       executar: () => {
+      // 1. Mostra a notificação imediatamente
+      mostrarToast("Pedido enviado para o WhatsApp! 🚀");
+      
+      // 2. Aguarda 2.0s para o usuário ver o aviso antes de abrir o WhatsApp
+      setTimeout(() => {
         gerarMensagemWhatsApp(carrinho, endereco, observacaoGeral);
         setCarrinho([]);
+      }, 2000);
       },
     });
   }
 
   function removerItem(id) {
-    if (confirm("Tem certeza que deseja remover este item?")) {
+      const itemRemovido = carrinho.find((item) => item.id === id);
       setCarrinho(carrinho.filter((item) => item.id !== id));
-    }
+
+      if (itemRemovido) {
+        mostrarToast(`"${itemRemovido.nome}" foi removido do carrinho 🗑️`)
+      }
   }
 
   const totalHeader = carrinho.reduce((acumulador, produto) => {
