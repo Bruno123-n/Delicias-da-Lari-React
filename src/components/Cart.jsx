@@ -7,12 +7,19 @@ import AddressForm from "./AddressForm";
 function Cart({
   carrinho,
   diminuirQuantidade,
-  adicionarAoCarrinho,
+  adicionarAoCarrinho, 
   limparCarrinho,
   removerItem,
   finalizarPedido,
 }) {
-  const [endereco, setEndereco] = useState(null);
+  const [endereco, setEndereco] = useState({
+    cep: "",
+    rua: "",
+    bairro: "",
+    numero: "",
+    cidade: "",
+    uf: "",
+  });  
   const [observacaoGeral, setObservacaoGeral] = useState("");
 
   const total = carrinho.reduce((acumulador, produto) => {
@@ -32,7 +39,7 @@ function Cart({
     );
   }
   return (
-    <div className="cart">
+    <div className="cart">a
       <h2>🛒 Carrinho</h2>
 
       {carrinho.map((produto) => {
@@ -73,7 +80,8 @@ function Cart({
       <CartSummary total={total} totalItens={totalItens} />
 
       <AddressForm
-        onEnderecoChange={(dadosDoEndereco) => setEndereco(dadosDoEndereco)}
+        endereco={endereco}
+        setEndereco={setEndereco}
       />
 
       <div className="cart-actions">
