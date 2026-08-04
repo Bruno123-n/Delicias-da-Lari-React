@@ -6,6 +6,10 @@ export default function AddressForm({ endereco, setEndereco }) {
   const [loading, setLoading] = useState(false);
   const [erro, setErro] = useState("");
 
+  if (!endereco) {
+    return null;
+  }
+
   const handleCepBlur = async (e) => {
     const cep = e.target.value;
     if (!cep) return;
