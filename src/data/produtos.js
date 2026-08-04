@@ -1,4 +1,4 @@
-const produtos = [
+export const produtos = [
     { 
       id: 1, 
       nome: "Bolo de Milho",
@@ -29,7 +29,3 @@ const produtos = [
       imagem: "imagens/Pao-caseiro.jpg" 
     }
   ]
-
-
-
-export default produtos
