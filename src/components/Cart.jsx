@@ -9,6 +9,7 @@ function Cart({
   diminuirQuantidade,
   adicionarAoCarrinho, 
   limparCarrinho,
+  
   removerItem,
   finalizarPedido,
 }) {
@@ -39,7 +40,7 @@ function Cart({
     );
   }
   return (
-    <div className="cart">a
+    <div className="cart">
       <h2>🛒 Carrinho</h2>
 
       {carrinho.map((produto) => {
