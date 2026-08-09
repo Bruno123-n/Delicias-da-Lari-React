@@ -1,33 +1,32 @@
-import formatPrice from "../utils/formatPrice";
+import formatPrice from "../utils/formatPrice"
+const NUMERO_WHATSAPP = "5547997688933"
 
 function gerarMensagemWhatsApp(carrinho, endereco, observacaoGeral) {
   const total = carrinho.reduce((acumulador, produto) => {
-    return acumulador + produto.quantidade * produto.preco;
-  }, 0);
+    return acumulador + produto.quantidade * produto.preco
+  }, 0)
 
-  let textoEndereco;
+  let textoEndereco
 
   if (endereco && endereco.rua) {
-    textoEndereco = `Endereço de Entrega:
-Rua: ${endereco.rua}
+    textoEndereco = `📍Endereço de Entrega:
+Rua: ${endereco.rua}, Nº ${endereco.numero || "S/N"}
 Bairro: ${endereco.bairro}
-Cidade: ${endereco.cidade}
-CEP: ${endereco.cep}`;
+Cidade: ${endereco.cidade} - ${endereco.uf}
+CEP: ${endereco.cep}`
   } else {
-    textoEndereco = `Endereço: Não informado / Retirada no local`;
+    textoEndereco = `📍 *Entrega:* Retirada no local`
   }
 
   const itens = carrinho.map((produto) => {
-    const subtotal = produto.preco * produto.quantidade;
-    return `${produto.quantidade} x ${produto.nome} - ${formatPrice(subtotal)}`;
+    const subtotal = produto.preco * produto.quantidade
+    return `•  ${produto.quantidade} x ${produto.nome} - ${formatPrice(subtotal)}`
   });
-  const pedido = itens.join("\n");
-
-  const emojiPin = String.fromCodePoint(0x1f4cc);
+  const pedido = itens.join("\n")
 
   const textoObs = observacaoGeral
-    ? `\n${emojiPin} *OBSERVAÇÕES:* ${observacaoGeral}\n`
-    : "";
+    ? `\n📌 *Observações:* ${observacaoGeral}\n`
+    : ""
 
   const mensagem = `Olá!
 
@@ -40,7 +39,7 @@ Total: ${formatPrice(total)}
 ${textoEndereco}
 ${textoObs}
 
-Aguardo a confirmação. Obrigado!`;
+Aguardo a confirmação. Obrigado!`
 
 // Detecta se o usuário está acessando por um celular
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -48,12 +47,12 @@ const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 // Se for celular, usa o link direto do App (wa.me)
 // Se for computador, usa o WhatsApp Web (que não quebra o emoji!)
 const baseUrl = isMobile 
-  ? "https://wa.me/5547997688933?text=" 
-  : "https://web.whatsapp.com/send?phone=5547997688933&text=";
+  ? `https://wa.me/${NUMERO_WHATSAPP}?text=` 
+  : `https://web.whatsapp.com/send?phone=${NUMERO_WHATSAPP}&text=`
 
-const url = `${baseUrl}${encodeURIComponent(mensagem)}`;
+const url = `${baseUrl}${encodeURIComponent(mensagem)}`
 
-window.open(url, "_blank");
+window.open(url, "_blank")
 }
 
-export default gerarMensagemWhatsApp;
+export default gerarMensagemWhatsApp

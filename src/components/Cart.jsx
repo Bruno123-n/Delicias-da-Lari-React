@@ -9,7 +9,6 @@ function Cart({
   diminuirQuantidade,
   adicionarAoCarrinho, 
   limparCarrinho,
-  
   removerItem,
   finalizarPedido,
 }) {
@@ -22,6 +21,31 @@ function Cart({
     uf: "",
   });  
   const [observacaoGeral, setObservacaoGeral] = useState("");
+
+  //função interna mpara resetar os campos do formulario
+  const resetarFormularios = () => {
+    setEndereco({
+      cep: "",
+      rua: "",
+      bairro: "",
+      numero: "",
+      cidade: "",
+      uf: "",
+    })
+    setObservacaoGeral("")
+  }
+
+  // Trata a ação de limpar tudo (carrinho + campos)
+  const handleLimparCarrinho = () => {
+    limparCarrinho();
+    resetarFormularios();
+  }
+
+  // Trata a ação de finalizar pedido (envia e reseta)
+  const handleFinalizarPedido = () => {
+    finalizarPedido(carrinho, endereco, observacaoGeral);
+    resetarFormularios();
+  }
 
   const total = carrinho.reduce((acumulador, produto) => {
     return acumulador + produto.preco * produto.quantidade;
@@ -86,13 +110,13 @@ function Cart({
       />
 
       <div className="cart-actions">
-        <button className="limparCarrinho" onClick={limparCarrinho}>
+        <button className="limparCarrinho" onClick={handleLimparCarrinho}>
           limpar carrinho
         </button>
         <button
           className="finalizarPedido"
           type="submit"
-          onClick={() => finalizarPedido(carrinho, endereco, observacaoGeral)}
+          onClick={handleFinalizarPedido}
         >
           Finalizar o pedido
         </button>
