@@ -8,11 +8,12 @@ import ConfirmModal from "./components/ConfirmModal";
 import gerarMensagemWhatsApp from "./utils/gerarMensagemWhatsApp";
 import ProductDetails from "./components/ProductDetails";
 import { useCart } from "./hooks/useCart";
+import { useToast } from "./hooks/useToast";
 import "./App.css";
 
 
 function App() {
-  const [mensagemToast, setMensagemToast] = useState("");
+  const { mensagemToast, mostrarToast } = useToast();
 
   const [confirmacao, setConfirmacao] = useState(null);
 
@@ -31,17 +32,6 @@ function App() {
     totalItens,
     setCarrinho,
   } = useCart();
-
-  
-
-  
-  function mostrarToast(mensagem) {
-    setMensagemToast(mensagem);
-
-    setTimeout(() => {
-      setMensagemToast("");
-    }, 2500);
-  }
   
   function adicionarAoCarrinho(produto) {
     adicionarHook(produto);

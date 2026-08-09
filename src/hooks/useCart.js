@@ -21,8 +21,6 @@ export function useCart() {
     
   }, [carrinho]) 
   
-//   console.log(carrinho)
-
   // Adiciona produto ou aumenta a quantidade se já existir
   const adicionarAoCarrinho = (produto) => {
     setCarrinho((itensAnteriores) => {
