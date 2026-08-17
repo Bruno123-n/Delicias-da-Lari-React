@@ -61,7 +61,7 @@ Passo a passo
 1.   Clone o repositório:
 
 Bash
-git clone [https://github.com/SEU-USUARIO/Delicias-da-Lari-React.git](https://github.com/SEU-USUARIO/Delicias-da-Lari-React.git)
+git clone [https://github.com/Bruno123-n/Delicias-da-Lari-React.git](https://github.com/Bruno-n/Delicias-da-Lari-React.git)
 
 2. Acesse a pasta do projeto:
 
